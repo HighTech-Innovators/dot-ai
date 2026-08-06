@@ -1,7 +1,10 @@
 # Flutter Widget Conventions
 
 How individual widgets are authored and split. Complements
-`05-folder-structure.md` (between-widget organisation).
+`05-folder-structure.md` (between-widget organisation) and
+`09-architecture.md` (why logic belongs on the ViewModel, not the
+widget — this file is about splitting the *View*, not where
+business logic lives).
 
 ---
 

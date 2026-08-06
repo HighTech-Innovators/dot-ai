@@ -1,29 +1,35 @@
 # Flutter Navigation
 
-How screens are wired. No routing package is installed — see
-`01-constraints.md`.
+How screens are wired. `go_router` is the default navigation
+package for this project — see `01-constraints.md`.
 
 ---
 
-## Baseline: the built-in `Navigator`
+## Baseline: `go_router`
 
-- **`Navigator.push`/`pop` with `MaterialPageRoute`** (or named
-  routes via `onGenerateRoute` in `app.dart`) is the navigation
-  model until a real need — deep linking, nested/tabbed navigation
-  stacks the imperative API can't express cleanly — justifies a
-  routing package.
-- **Adopting a routing package (e.g. `go_router`) is an
-  architectural decision.** It requires an ADR, per
-  `01-constraints.md`.
-
-## Named routes, if used
-
-- **Route name constants are declared in one place** (e.g.
-  `app.dart` or a small `routes.dart`), not as string literals
-  scattered across call sites.
+- **[`go_router`](https://pub.dev/packages/go_router) is the
+  default navigation solution**, per Flutter's own architecture
+  recommendation — it covers the large majority of navigation
+  needs (declarative routes, deep linking, nested/tabbed
+  navigation) that the imperative `Navigator` API can't express
+  cleanly.
+- **Routes are declared in one place** (e.g.
+  `routing/app_router.dart`), not as `GoRoute` literals or path
+  strings scattered across call sites.
 - Route names are `PascalCase` and match the screen they open:
-  `ProfileDetailScreen` → route `/profile-detail` or
-  `ProfileDetail`, consistently.
+  `ProfileDetailScreen` → route name `ProfileDetail`, path
+  `/profile-detail`, consistently.
+
+## Falling back to the built-in `Navigator`
+
+- **The imperative `Navigator` API is still available** for the
+  minority of cases `go_router` doesn't solve cleanly — e.g. a
+  transient overlay pushed from deep inside a widget tree. Reach
+  for it explicitly for those cases; don't route around `go_router`
+  by habit.
+- **Adopting a different routing package instead of `go_router`
+  is an architectural decision.** It requires an ADR, per
+  `01-constraints.md`.
 
 ## Back behaviour
 

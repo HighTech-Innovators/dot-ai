@@ -21,18 +21,31 @@ don't route around it.
   is enforced by `prefer_const_constructors` in the lint set —
   treat a lint failure here as a bug, not noise to suppress.
 
-## No presumed third-party stack
+## Default architecture stack
 
-- **Do not assume a state-management, routing, or DI package**
-  (Provider, Riverpod, Bloc, GetX, go_router, or similar) is
-  installed. Check `pubspec.yaml` first.
-- **Adopting any such package is an architectural decision.**
+This project follows Flutter's own architecture recommendation
+(MVVM + repository pattern — see `09-architecture.md`), which pulls
+in two packages by default:
+
+- **[`provider`](https://pub.dev/packages/provider) is the default
+  dependency-injection mechanism.** Add it to `pubspec.yaml` if
+  it's missing — no ADR needed for `provider` specifically.
+- **[`go_router`](https://pub.dev/packages/go_router) is the
+  default navigation package** (see `06-navigation.md`) — no ADR
+  needed for `go_router` specifically.
+
+## No other presumed third-party stack
+
+- **Do not assume any other state-management package** (Riverpod,
+  Bloc, GetX, or similar) is installed. Check `pubspec.yaml` first.
+- **Adopting one of those is still an architectural decision.**
   Escalate to the architect and record the choice in an ADR before
   adding it — per `global/01-principles.md` ("new dependencies
   without a recorded reason").
-- **Until then, use Flutter's own primitives**: `setState`,
-  `InheritedWidget`/`ValueNotifier` for state; the built-in
-  `Navigator` for navigation (see `06-navigation.md`).
+- **`ChangeNotifier`/`Listenable` (bundled with the SDK) are the
+  default way to expose ViewModel state to widgets** until/unless
+  the project adopts something else via that ADR — see
+  `09-architecture.md`.
 
 ## Platform folders
 
@@ -45,6 +58,7 @@ don't route around it.
 Testing (`02-testing.md`), performance (`03-performance.md`),
 accessibility (`04-accessibility.md`), folder structure
 (`05-folder-structure.md`), navigation (`06-navigation.md`),
-build/release (`07-build-and-release.md`), and widget-authoring
-conventions (`08-widget-conventions.md`) each live in their own
-file.
+build/release (`07-build-and-release.md`), widget-authoring
+conventions (`08-widget-conventions.md`), and the UI/data
+architecture layering (`09-architecture.md`) each live in their
+own file.

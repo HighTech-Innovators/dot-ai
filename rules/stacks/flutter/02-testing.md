@@ -46,4 +46,6 @@ posture in `global/06-testing.md`.
 ## What this does not cover
 
 Widget-authoring conventions that make a widget testable in the
-first place live in `08-widget-conventions.md`.
+first place live in `08-widget-conventions.md`. What to test at the
+service/repository/ViewModel layer, and why fakes over mocks, is
+covered in `09-architecture.md`.
