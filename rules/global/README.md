@@ -9,7 +9,7 @@ bottom.
 Constraints that apply regardless of language, framework, or
 product. Principles, conduct, documentation, version control,
 testing, dependencies, secrets, observability. If a rule is true
-for both a Node service and a React Native app, it belongs here.
+for both a backend service and a mobile app, it belongs here.
 
 ## What does not live here
 
